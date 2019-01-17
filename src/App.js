@@ -2,6 +2,7 @@ import React from 'react';
 import Titles from './components/Titles';
 import Form from './components/Form';
 import Weather from './components/Weather';
+import Forecast from './components/Forecast';
 import './bootstrap.min.css';
 import './styles.css';
 
@@ -17,11 +18,14 @@ export default class App extends React.Component{
                   country:undefined,
                   description:undefined,
                   error:null,
+                  forecastDataArray:[],
+                  weather:''
             }
             this.getWeather = this.getWeather.bind(this);
       }
 
       async getWeather(e){    
+            let app = this;
             e.preventDefault();
             const city = e.target.elements.city.value;
             const country = e.target.elements.country.value;
@@ -29,27 +33,29 @@ export default class App extends React.Component{
             const forecastApiCall = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${API_KEY}`);
             const currWeatherData = await currWeatherApiCall.json();
             const forecastData = await forecastApiCall.json();
-            let apiResults = [currWeatherData, forecastData];
-            apiResults.forEach(function(apiResult) {
-                  console.log(apiResult);
-            });
+            console.log(forecastData.list[0].weather[0].main);
+            console.log(forecastData);
+
+            
            
-            if(apiResults){
-                  this.setState({
-                        error:true
-                  })
-                 console.log('there is no data');
-            }
-            else{
-                  this.setState({
-                        temperature:data.main.temp,
-                        humidity:data.main.humidity,
-                        city:data.name,
-                        country:data.sys.country,
-                        description:data.weather[0].description,
-                        error:null,
-                  })
-            }
+           
+            
+            
+                  
+            
+            
+            
+            this.setState({
+                  temperature:currWeatherData.main.temp,
+                  humidity:currWeatherData.main.humidity,
+                  city:currWeatherData.name,
+                  country:currWeatherData.sys.country,
+                  description:currWeatherData.weather[0].description,
+                  error:null,
+                  weather:'yes'
+                 
+            })
+            
       }
 
       render(){
@@ -66,7 +72,17 @@ export default class App extends React.Component{
                               error={this.state.error}
                               description={this.state.description}
                               temperature={this.state.temperature}
+                              
+
                         />  
+                        
+                        <Forecast
+                              
+                              weather={this.state.weather}
+                              
+                        />
+
+                        
                   </div>
                  
             )
