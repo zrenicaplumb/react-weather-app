@@ -7,7 +7,6 @@ export default class Titles extends React.Component{
                         <h1>Weather Checker</h1>
                         <h3>Check the temperature, weather conditions and more</h3>
                   </div>
-                  
             )
       }
 }
