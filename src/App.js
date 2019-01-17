@@ -25,10 +25,16 @@ export default class App extends React.Component{
             e.preventDefault();
             const city = e.target.elements.city.value;
             const country = e.target.elements.country.value;
-            const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`);
-            const data = await api_call.json();
-            console.log(data);
-            if(!data){
+            const currWeatherApiCall = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`);
+            const forecastApiCall = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${API_KEY}`);
+            const currWeatherData = await currWeatherApiCall.json();
+            const forecastData = await forecastApiCall.json();
+            let apiResults = [currWeatherData, forecastData];
+            apiResults.forEach(function(apiResult) {
+                  console.log(apiResult);
+            });
+           
+            if(apiResults){
                   this.setState({
                         error:true
                   })
