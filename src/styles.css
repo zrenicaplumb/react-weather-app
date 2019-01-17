@@ -1,0 +1,49 @@
+body{
+      background: rgb(201, 199, 199);
+}
+#root{
+      width: 50%;
+      margin:40px auto;
+      
+}
+.titlesWrap{
+     
+}
+.titlesWrap h1, h3{
+      color:#fff;
+      font-weight: 100;
+}
+form input, .submitBtn{
+      display: inline-block;
+    margin: 20px 15px;
+    border-radius: 3px;
+    border: none;
+    padding: 5px;
+}
+form input:first-child{
+      margin-left:0;
+}
+.submitBtn{
+      padding: 5px 10px;
+      background-color: darkgray;
+}
+.container{
+      background: rgb(24,40,55);
+      padding:60px;
+      border-radius: 5px;
+}
+.weather{
+      color:#fff;
+}
+.weather label, .weather span{
+      
+      font-size: 24px;
+}
+.weather label{
+      display: block;
+      font-weight: 100;
+}
+.weather span{
+      font-weight: 400;
+      display: inline;
+}
