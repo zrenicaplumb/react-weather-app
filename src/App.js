@@ -5,6 +5,7 @@ import Weather from './components/Weather';
 import Forecast from './components/Forecast';
 import './bootstrap.min.css';
 import './styles.css';
+import ForecastHourly from './components/ForecastHourly';
 
 const API_KEY = "016a6f0bc508419a9a9bbb66139efee0";
 
@@ -19,9 +20,10 @@ export default class App extends React.Component{
                   description:undefined,
                   error:null,
                   forecastDataArray:[],
-                  weather:''
             }
             this.getWeather = this.getWeather.bind(this);
+            this.showHourlyWeather = this.showHourlyWeather.bind(this);
+
       }
 
       async getWeather(e){    
@@ -32,18 +34,21 @@ export default class App extends React.Component{
             const currWeatherApiCall = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`);
             const forecastApiCall = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${API_KEY}`);
             const currWeatherData = await currWeatherApiCall.json();
-            const forecastData = await forecastApiCall.json();
-            console.log(forecastData.list[0].weather[0].main);
-            console.log(forecastData);
+            let forecastData = await forecastApiCall.json();
+            //get the forecast data
 
-            
-           
-           
-            
-            
+            //make the new array to replace the one in state
+            const forecastDataArray = [];
+
+            forecastData.list.forEach(function(item){
+
+                  forecastDataArray.push(item);
                   
-            
-            
+            })
+
+            console.log(typeof(forecastDataArray));
+
+            console.log('forecastDataArray', forecastDataArray);
             
             this.setState({
                   temperature:currWeatherData.main.temp,
@@ -52,19 +57,23 @@ export default class App extends React.Component{
                   country:currWeatherData.sys.country,
                   description:currWeatherData.weather[0].description,
                   error:null,
-                  weather:'yes'
-                 
+                  forecastDataArray:forecastDataArray,
             })
-            
+      }
+
+      showHourlyWeather(e){
+
       }
 
       render(){
+            console.log(this.state)
             return(
                   <div className="container">
                         <Titles/>
                         <Form 
                               getWeather={this.getWeather}
                         />
+                        <h3><strong>Current Weather:</strong></h3>
                         <Weather 
                               humidity={this.state.humidity}
                               city={this.state.city}
@@ -72,15 +81,13 @@ export default class App extends React.Component{
                               error={this.state.error}
                               description={this.state.description}
                               temperature={this.state.temperature}
-                              
-
                         />  
-                        
+                        <h3 className="forecasth3"><strong>5 Day Forecast:</strong></h3>
                         <Forecast
-                              
-                              weather={this.state.weather}
-                              
+                              forecastDataArray={this.state.forecastDataArray}
+                              showHourlyWeather={this.showHourlyWeather}
                         />
+                       
 
                         
                   </div>
@@ -88,3 +95,4 @@ export default class App extends React.Component{
             )
       }
 }
+

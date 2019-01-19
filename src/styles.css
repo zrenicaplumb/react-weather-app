@@ -2,7 +2,7 @@ body{
       background: rgb(201, 199, 199);
 }
 #root{
-      width: 50%;
+      width: 70%;
       margin:40px auto;
 }
 .titlesWrap{
@@ -31,18 +31,43 @@ form input:first-child{
       padding:60px;
       border-radius: 5px;
 }
-.weather{
+.weather, .forecast{
       color:#fff;
 }
-.weather label, .weather span{
+.weather label, .weather span, .forecast label{
       
       font-size: 24px;
 }
-.weather label{
+.weather label, .forecast label{
       display: block;
       font-weight: 100;
 }
-.weather span{
+.weather span, .forecast span, .weatherCard span{
       font-weight: 400;
       display: inline;
 }
+.forecast {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+  }
+  .hourlyWeatherCard{
+      margin:30px;
+      padding: 12px;
+      background:rebeccapurple;
+  }
+  .forecast label{
+        display: inline-block;
+  }
+  .forecasth3{
+        margin:30px 0;
+  }
+  .forecast .fieldGroup{
+      padding: 10px;
+      border: 1px solid #fff;
+      width: 155px;
+      padding-top: 80px;
+      text-transform: capitalize;
+  }
+  
+
