@@ -1,6 +1,9 @@
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import App from './App';
 
-import ReactDOM from 'react-dom';
-import React from "react";
-import App from './App.js';
-
-ReactDOM.render(<App/>, document.querySelector('#root'));
+export default () => (
+      <BrowserRouter>
+            <Route path="/" component={App}/>
+      </BrowserRouter>
+);
