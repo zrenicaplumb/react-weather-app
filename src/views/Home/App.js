@@ -1,33 +1,19 @@
 import React from 'react';
-import Titles from './components/Titles';
-import Form from './components/Form';
-import Weather from './components/Weather';
-import Forecast from './components/Forecast';
+import Titles from '../../components/Titles';
+import Form from '../../components/Form';
+import Weather from '../../components/Weather';
+import Forecast from '../../components/Forecast';
 import './bootstrap.min.css';
 import './styles.css';
-import ForecastHourly from './components/ForecastHourly';
-// import Link from 'react-router/Link';
+import ForecastHourly from '../ForecastHourly/ForecastHourly';
+import { Link } from 'react-router-dom'
+
+
+
 
 const API_KEY = "016a6f0bc508419a9a9bbb66139efee0";
 
-// const Navigation = () => {
-//       return <div>      
-//             <ul>
-//                   <li>
-//                         <Link to="/">Home</Link>
-//                   </li>
-//                   <li>
-//                         <Link to="/">About</Link>
-//                   </li>
-//                   <li>
-//                         <Link to="/">Details</Link>
-//                   </li>
-//                   <li>
-//                         <Link to="/">Home</Link>
-//                   </li>
-//             </ul>
-//       </div>
-// }
+
 
 export default class App extends React.Component{
       constructor(props){

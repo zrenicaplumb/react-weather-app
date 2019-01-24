@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import ForecastHourly from '../views/ForecastHourly/ForecastHourly';
 
 export default class Forecast extends React.Component{
       //save date as variable
@@ -30,15 +32,21 @@ export default class Forecast extends React.Component{
                              this.props.forecastDataArray.map(function(item){
                                     let date = item.dt_txt.slice(9,10);
                                     let weather = item.weather[0];
-                                    console.log(prevDate);
+                                    console.log(item);
                                     if(date != prevDate){
                                           prevDate = date;
                                           return(
-                                                <div className="fieldGroup" >
-                                                      <p>{Math.round((item.main.temp - 273.15) * (1.8) + 32) + ' F'}</p>
-                                                      <p>{weather.main}</p>
-                                                      <p>{item.dt_txt.slice(0,10)}</p>
-                                                </div>
+                                                      
+                                                      
+                                                      <div className="fieldGroup" >
+                                                            <ForecastHourly 
+                                                                  forecastHourlyInfo={item}
+                                                            />
+                                                            <p>{Math.round((item.main.temp - 273.15) * (1.8) + 32) + ' F'}</p>
+                                                            <p>{weather.main}</p>
+                                                            <p>{item.dt_txt.slice(0,10)}</p>
+                                                      </div>
+                                             
                                                 
 
                                           )
