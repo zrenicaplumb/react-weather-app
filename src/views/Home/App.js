@@ -26,6 +26,7 @@ export default class App extends React.Component{
                   description:undefined,
                   error:null,
                   forecastDataArray:[],
+                  hourlyWeather:[]
             }
             this.getWeather = this.getWeather.bind(this);
             this.showHourlyWeather = this.showHourlyWeather.bind(this);
@@ -52,6 +53,8 @@ export default class App extends React.Component{
                   
             })
 
+            const hourlyWeather = [];
+
             console.log('forecastDataArray', forecastDataArray);
             
             this.setState({
@@ -62,6 +65,7 @@ export default class App extends React.Component{
                   description:currWeatherData.weather[0].description,
                   error:null,
                   forecastDataArray:forecastDataArray,
+                  hourlyWeather:hourlyWeather
             })
       }
 
@@ -91,7 +95,7 @@ export default class App extends React.Component{
                               forecastDataArray={this.state.forecastDataArray}
                         >
                               <ForecastHourly 
-                                    hourlyWeather={this.state.forecastDataArray}
+                                    hourlyWeather={this.state.hourlyWeather}
                               />
                         </Forecast>
                        

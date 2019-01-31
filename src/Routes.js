@@ -1,7 +1,6 @@
 import { browserHistory, Router, Route, Redirect, Switch } from 'react-router-dom';
 import React from 'react';
 import {Home} from './views/Home';
-import {About} from './views/About';
 import {NoMatch} from './views/NoMatch';
 import App from './views/Home/App';
 import {Navbar} from './components/Navbar/Navbar';
@@ -19,7 +18,7 @@ export const Routes = () => {
                         <Route exact path="/">
                               <Redirect to="/Home"/>
                         </Route>
-                        <Route exact path="/ForecastHourly" component={ForecastHourly}/>
+                        <Route exact path="/ForecastHourly/:id" component={ForecastHourly}/>
                         <Route component={NoMatch}/>
                         
                   </Switch>
