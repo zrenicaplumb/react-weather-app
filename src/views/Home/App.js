@@ -52,8 +52,6 @@ export default class App extends React.Component{
                   
             })
 
-            console.log(typeof(forecastDataArray));
-
             console.log('forecastDataArray', forecastDataArray);
             
             this.setState({
@@ -91,8 +89,11 @@ export default class App extends React.Component{
                         <h3 className="forecasth3"><strong>5 Day Forecast:</strong></h3>
                         <Forecast
                               forecastDataArray={this.state.forecastDataArray}
-                              showHourlyWeather={this.showHourlyWeather}
-                        />
+                        >
+                              <ForecastHourly 
+                                    hourlyWeather={this.state.forecastDataArray}
+                              />
+                        </Forecast>
                        
 
                         

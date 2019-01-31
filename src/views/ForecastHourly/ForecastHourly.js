@@ -7,28 +7,9 @@ export default class ForecastHourly extends React.Component{
       render(){
             return(
                   <div className="forecastHourly">
-                        {this.props.forecastDataArray &&  this.props.forecastDataArray.map(function(item){
-                              return(
-                                    <div className="hourlyWeatherCard">
-                                          <div className="fieldGroup">
-                                                <label>Date: </label>
-                                                <span>{item.dt_txt}</span>
-                                          </div>
-                                          <div className="fieldGroup">
-                                                <label>Temp: </label>
-                                                <span>{(item.main.temp - 273.15) * (1.8) + 32}</span>
-                                          </div>
-                                          <div className="fieldGroup">
-                                                <label>Weather:</label>
-                                                <span>{item.weather[0].description}</span>
-                                          </div>
-
-                                     
-
-                                    </div>
-                              )
-                              
-                        })}
+                        <div className="fieldGroup" >
+                              {this.props.hourlyWeather}
+                        </div>
                         
                         
                   </div>
