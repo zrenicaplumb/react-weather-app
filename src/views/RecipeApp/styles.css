@@ -40,6 +40,19 @@ form input, .searchSubmitBtn{
 .min_calories, .max_calories{
       margin:20px 0;
 }
+.recipeListContainer {
+      display: flex;
+      flex-wrap: wrap;
+  }
+  .recipe {
+      width: 29%;
+      background: #fff;
+      margin: 14px;
+      color: #333;
+  }
 .recipeItem img{
-      width:200px;
+      width:100%;
 }
+.info-wrap {
+      padding: 12px;
+  }
