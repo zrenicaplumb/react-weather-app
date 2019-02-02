@@ -1,5 +1,5 @@
 .recipeSearch, .searchForm{
-      text-align: center;
+      display: inline;
       font-weight: 100;
 }
 .recipeAppWrap{
@@ -10,9 +10,9 @@
       color: #fff;
       padding: 20px;
 }
-form input, .submitBtn{
+form input, .searchSubmitBtn{
       display: inline-block;
-    margin: 20px 15px;
+   
     border-radius: 3px;
     border: none;
     padding: 5px;
@@ -20,4 +20,26 @@ form input, .submitBtn{
 .searchItem{
       text-transform: capitalize;
       color:#fff;
+}
+.searchForm > *{
+      display: block;
+}
+.searchForm .recipe_search{
+      display: inline-block;
+      margin-left:20px;
+}
+.searchForm h4{
+      font-weight: 100;
+      margin-top: 30px;
+}
+.searchSubmitBtn{
+      margin:20px 0;
+      background: darkgray;
+      padding:5px 10px;
+}
+.min_calories, .max_calories{
+      margin:20px 0;
+}
+.recipeItem img{
+      width:200px;
 }

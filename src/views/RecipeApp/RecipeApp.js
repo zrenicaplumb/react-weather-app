@@ -1,6 +1,8 @@
 import React from 'react';
 import Search from '../../components/RecipeApp/Search';
 import Title from '../../components/RecipeApp/Title';
+import Recipe from '../../components/RecipeApp/Recipe';
+import { Link } from 'react-router';
 import './styles.css';
 
 const APP_ID = 'e05eeb65';
@@ -14,22 +16,39 @@ export default class App extends React.Component{
             this.state = {
                   recipeData:undefined,
                   searchItem:undefined,
+                  recipeArray:[],
             }
             this.getRecipeData = this.getRecipeData.bind(this);
       }
 
       async getRecipeData(e){
             e.preventDefault();
-            console.log(e);
-            console.log(e.target);
-            console.log(e.target.elements);
             const search = e.target.elements.recipe_search.value;
-            const api_call = await fetch(`https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}`);
+            const max_search_results = e.target.elements.max_search_results.value;
+            let min_calories = e.target.elements.min_calories.value;
+            let max_calories = e.target.elements.max_calories.value;
+            if(!min_calories){
+                  min_calories = 100;
+            }
+            if(!max_calories){
+                  max_calories = 1000;
+            }
+            const api_call = await fetch(`https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}
+                                          &to=${max_search_results}&calories=${min_calories}-${max_calories}`);
             const data = await api_call.json();
+            const searchItem = data.q;
+            const recipeArray = [];
             console.log(data);
+            data.hits.forEach(function(item){
+                  recipeArray.push(item.recipe);
+
+            })
+            console.log(recipeArray);
+
             this.setState({
                   recipeData:data,
-                  searchItem:data.q,
+                  searchItem:searchItem,
+                  recipeArray:recipeArray,
             })
       }
 
@@ -44,16 +63,31 @@ export default class App extends React.Component{
                                     <Search 
                                           getRecipeData={this.getRecipeData}
                                     />
+                                    <div className="recipeListContainer">
+                                    
+                                    
+                                    {this.state.recipeArray && this.state.recipeArray.map(function(recipe){
+                                          console.log(recipe);
+                                          
+                                          return(
+                                                <div className="recipe">
+                                                <Link >
+                                                      <Recipe
+                                                            label={recipe.label}
+                                                            image={recipe.image}
+                                                            alt={recipe.label}
+                                                            calories={recipe.calories}
+                                                            totalTime={recipe.totalTime}
+                                                      />
+                                                </Link>
+                                                      
+                                                </div>    
+                                          )
+                                    })}
+                                    </div>
                               </div>
-                              {/* : "mustard", from: 0, to: 10, params: {…}, more: true, …}
-                                    count: 72248
-                                    from: 0
-                                    hits: (10) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-                                    more: true
-                                    params: {sane: Array(0), q: Array(1), app_key: Array(1), app_id: Array(1)}
-                                    q: "mustard"
-                                    to: 10 */}
-                              {this.state.searchItem && <h2>{this.props.searchItem} Recipes</h2>}
+
+                              {this.state.searchItem && <h2 className="searchItem">{this.state.searchItem} Recipes</h2>}
                         </div>
                   </div>
             )

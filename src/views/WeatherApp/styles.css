@@ -28,7 +28,7 @@ form input:first-child{
 }
 .container{
       background: rgb(24,40,55);
-      padding:60px;
+      padding:20px;
       border-radius: 5px;
 }
 .weather, .forecast{
