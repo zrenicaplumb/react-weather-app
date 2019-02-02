@@ -2,8 +2,9 @@ import { browserHistory, Router, Route, Redirect, Switch } from 'react-router-do
 import React from 'react';
 import {Home} from './views/Home';
 import {NoMatch} from './views/NoMatch';
-import App from './views/Home/App';
-import {Navbar} from './components/Navbar/Navbar';
+import WeatherApp from './views/WeatherApp/WeatherApp';
+import RecipeApp from './views/RecipeApp/RecipeApp';
+import {Navbar} from './components/Navbar';
 import ForecastHourly from './views/ForecastHourly/ForecastHourly';
 
 
@@ -14,10 +15,13 @@ export const Routes = () => {
             <div>
                   <Navbar/>
                   <Switch>
-                        <Route exact path="/Home" component={App}/>
+                        <Route exact path="/Home" component={Home}/>
                         <Route exact path="/">
                               <Redirect to="/Home"/>
                         </Route>
+                        <Route exact path="/WeatherApp" component={WeatherApp}/>
+                        <Route exact path="/RecipeApp" component={RecipeApp}/>
+
                         <Route exact path="/ForecastHourly/:id" component={ForecastHourly}/>
                         <Route component={NoMatch}/>
                         

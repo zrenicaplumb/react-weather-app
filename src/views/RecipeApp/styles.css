@@ -1,0 +1,23 @@
+.recipeSearch, .searchForm{
+      text-align: center;
+      font-weight: 100;
+}
+.recipeAppWrap{
+      background: #333;
+}
+.headerWrap{
+      
+      color: #fff;
+      padding: 20px;
+}
+form input, .submitBtn{
+      display: inline-block;
+    margin: 20px 15px;
+    border-radius: 3px;
+    border: none;
+    padding: 5px;
+}
+.searchItem{
+      text-transform: capitalize;
+      color:#fff;
+}

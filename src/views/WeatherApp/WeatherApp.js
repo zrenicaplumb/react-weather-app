@@ -1,12 +1,10 @@
 import React from 'react';
-import Titles from '../../components/Titles';
-import Form from '../../components/Form';
-import Weather from '../../components/Weather';
-import Forecast from '../../components/Forecast';
-import './bootstrap.min.css';
+import Titles from '../../components/WeatherApp/Titles';
+import Form from '../../components/WeatherApp/Form';
+import Weather from '../../components/WeatherApp/Weather';
+import Forecast from '../../components/WeatherApp/Forecast';
 import './styles.css';
 import ForecastHourly from '../ForecastHourly/ForecastHourly';
-import { Link } from 'react-router-dom'
 
 
 
@@ -43,10 +41,10 @@ export default class App extends React.Component{
             const currWeatherData = await currWeatherApiCall.json();
             let forecastData = await forecastApiCall.json();
             //get the forecast data
-
+            console.log(forecastData);
             //make the new array to replace the one in state
             const forecastDataArray = [];
-
+            
             forecastData.list.forEach(function(item){
 
                   forecastDataArray.push(item);
@@ -55,7 +53,8 @@ export default class App extends React.Component{
 
             const hourlyWeather = [];
 
-            console.log('forecastDataArray', forecastDataArray);
+            
+
             
             this.setState({
                   temperature:currWeatherData.main.temp,

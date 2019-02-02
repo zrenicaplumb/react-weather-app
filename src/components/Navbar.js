@@ -5,13 +5,15 @@ import {Link} from 'react-router-dom';
 export const Navbar = () => {
       return(
             <div>
-                  <h5>Navbar</h5>
                   <ul>
                         <li>
                               <Link to="/Home">Home</Link>
                         </li>
                         <li>
-                              <Link to="/About">About</Link>
+                              <Link to="/WeatherApp">WeatherApp</Link>
+                        </li>
+                        <li>
+                              <Link to="/RecipeApp">RecipeApp</Link>
                         </li>
                         
                   </ul>

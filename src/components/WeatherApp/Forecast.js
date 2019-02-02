@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import ForecastHourly from '../views/ForecastHourly/ForecastHourly';
 
 export default class Forecast extends React.Component{
      
