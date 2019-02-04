@@ -18,9 +18,47 @@ export default class App extends React.Component{
                   recipes:[],
                   ingredients:[],
                   ingredientText:[],
+                  nutrition:[],
             }
             this.getRecipeData = this.getRecipeData.bind(this);
+            this.prepareData = this.prepareData.bind(this);
       }
+
+      async prepareData(data, searchItem){
+            const recipes = [];
+            const ingredientText = [];
+            const ingredients = [];
+            const nutrition = [];
+
+            console.log(data);
+            data.hits.forEach(function(item){
+                  recipes.push(item.recipe);
+            })
+            recipes.forEach(function(recipe){
+                  ingredients.push(recipe.ingredients);
+                  nutrition.push(recipe.digest);
+            })
+            ingredients.forEach(function(ingredient){
+                  ingredientText.push(ingredient.text);
+            })
+            this.setState({
+                  recipeData:data,
+                  recipes:recipes,
+                  ingredients:ingredients,
+                  ingredientText:ingredientText,
+                  searchItem:searchItem,
+                  nutrition:nutrition
+            })
+      }
+
+      async componentDidMount(){
+            const search = 'random';
+            const api_call = await fetch(`https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}&to=25`);
+            const data = await api_call.json();
+            this.prepareData(data);
+           
+      }
+      
 
       async getRecipeData(e){
             e.preventDefault();
@@ -36,34 +74,14 @@ export default class App extends React.Component{
             }
             const api_call = await fetch(`https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}
                                           &to=${max_search_results}&calories=${min_calories}-${max_calories}`);
+
             const data = await api_call.json();
             const searchItem = data.q;
-            const recipes = [];
-            const ingredientText = [];
-            const ingredients = [];
-            console.log(data);
-            data.hits.forEach(function(item){
-                  recipes.push(item.recipe);
-            })
-            recipes.forEach(function(recipe){
-                  ingredients.push(recipe.ingredients);
-            })
-            ingredients.forEach(function(ingredient){
-                  ingredientText.push(ingredient.text);
-            })
-            console.log(ingredients);
-            this.setState({
-                  recipeData:data,
-                  searchItem:searchItem,
-                  recipes:recipes,
-                  ingredients:ingredients,
-                  ingredientText:ingredientText,
-            })
+            this.prepareData(data, searchItem);
+            console.log(this.state)
       }
 
-      render(){
-            //to render recipes autoatically on page load, call the function etc idk
-            // this.getRecipeData();
+      render(){          
             return(
                   <div className="recipeAppWrap">
                         <div className="container">
@@ -73,22 +91,28 @@ export default class App extends React.Component{
                                           getRecipeData={this.getRecipeData}
                                     />
                                     {this.state.searchItem && <h2 className="searchItem">{this.state.searchItem} Recipes</h2>}
-
-                                    <div className="recipeListContainer">
+                                    <div className="recipeListContainer">{}
                                     {this.state.recipes && this.state.recipes.map(function(recipe){
+                                          
                                           return(
-                                                <div className="recipe">
+                                          
+                                                <div className="recipe" key={recipe.label}>
                                                       <Recipe
                                                             label={recipe.label}
                                                             image={recipe.image}
                                                             alt={recipe.label}
                                                             calories={recipe.calories}
                                                             totalTime={recipe.totalTime}
-                                                            
+                                                            shareas={recipe.shareas}
+                                                            source={recipe.source}
+                                                            url={recipe.url}
+                                                            // nutrition={this.state.nutrition}
                                                       />
+                        
                                                 </div>    
                                           )
-                                    })}
+                                    }, this)}
+                              
                                     </div>
                               </div>
                         </div>

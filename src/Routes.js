@@ -6,7 +6,7 @@ import WeatherApp from './views/WeatherApp/WeatherApp';
 import RecipeApp from './views/RecipeApp/RecipeApp';
 import {Navbar} from './components/Navbar';
 import ForecastHourly from './views/ForecastHourly/ForecastHourly';
-
+import RecipeDetails from './components/RecipeApp/RecipeDetails';
 
 
 
@@ -21,6 +21,7 @@ export const Routes = () => {
                         </Route>
                         <Route exact path="/WeatherApp" component={WeatherApp}/>
                         <Route exact path="/RecipeApp" component={RecipeApp}/>
+                        <Route exact path="/RecipeDetails/:label" component={RecipeDetails}/>
 
                         <Route exact path="/ForecastHourly/:id" component={ForecastHourly}/>
                         <Route component={NoMatch}/>
