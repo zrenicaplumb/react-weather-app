@@ -8,6 +8,12 @@ import './styles.css';
 const APP_ID = 'e05eeb65';
 const APP_KEY = '35964658d64fd0af273596106567c147';
 
+Object.defineProperty(Array.prototype, "pluck", {
+      value: function(key) {
+          return this.map(function(object) { return object[key]; });
+      }
+  });
+
 export default class App extends React.Component{
       
       constructor(props){
@@ -16,39 +22,24 @@ export default class App extends React.Component{
                   recipeData:undefined,
                   searchItem:undefined,
                   recipes:[],
-                  ingredients:[],
-                  ingredientText:[],
-                  nutrition:[],
+                  
             }
             this.getRecipeData = this.getRecipeData.bind(this);
             this.prepareData = this.prepareData.bind(this);
       }
 
       async prepareData(data, searchItem){
-            const recipes = [];
-            const ingredientText = [];
-            const ingredients = [];
-            const nutrition = [];
+            // console.log(data);
+            const recipes = data.hits.pluck('recipe');
+            console.log(recipes);
 
-            console.log(data);
-            data.hits.forEach(function(item){
-                  recipes.push(item.recipe);
-            })
-            recipes.forEach(function(recipe){
-                  ingredients.push(recipe.ingredients);
-                  nutrition.push(recipe.digest);
-            })
-            ingredients.forEach(function(ingredient){
-                  ingredientText.push(ingredient.text);
-            })
+
+            
             this.setState({
-                  recipeData:data,
-                  recipes:recipes,
-                  ingredients:ingredients,
-                  ingredientText:ingredientText,
                   searchItem:searchItem,
-                  nutrition:nutrition
+                  recipes:recipes,
             })
+            // console.log(this.state.recipes);
       }
 
       async componentDidMount(){
@@ -78,7 +69,6 @@ export default class App extends React.Component{
             const data = await api_call.json();
             const searchItem = data.q;
             this.prepareData(data, searchItem);
-            console.log(this.state)
       }
 
       render(){          
@@ -93,20 +83,11 @@ export default class App extends React.Component{
                                     {this.state.searchItem && <h2 className="searchItem">{this.state.searchItem} Recipes</h2>}
                                     <div className="recipeListContainer">
                                     {this.state.recipes && this.state.recipes.map(function(recipe){
-                                          
                                           return(
                                           
                                                 <div className="recipe" key={recipe.label}>
                                                       <Recipe
-                                                            label={recipe.label}
-                                                            image={recipe.image}
-                                                            alt={recipe.label}
-                                                            calories={recipe.calories}
-                                                            shareas={recipe.shareas}
-                                                            source={recipe.source}
-                                                            url={recipe.url}
-                                                            nutrition={recipe.digest}
-                                                            yield={recipe.yield}
+                                                            recipe={recipe}
                                                       />
                         
                                                 </div>    

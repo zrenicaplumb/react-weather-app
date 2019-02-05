@@ -4,26 +4,26 @@ import Nutrients from '../../components/RecipeApp/Nutrients';
 
 export default class Recipe extends React.Component{
     render(){
+        const {recipe} = this.props;
         return(
         
             <div className="recipeItem">
-                <img src={this.props.image} alt={this.props.alt}/>
+                <img src={recipe.image} alt={recipe.alt}/>
                 <div className="info-wrap">
-                    <h4>{this.props.label}</h4>
-                    <p>Calories: {Math.round(this.props.calories)}</p>
-                    {console.log(this.props)}
+                    <h4>{recipe.label}</h4>
+                    <p>Calories: {Math.round(recipe.calories)}</p>
                 </div>
                 <Link to={{
-                    pathname: `/RecipeDetails/${this.props.label.replace(/-| |/g,'').toLowerCase()}`,
+                    pathname: `/RecipeDetails/${recipe.label.replace(/-| |/g,'').toLowerCase()}`,
                     state: {
-                        label:this.props.label,
-                        calories:this.props.calories,
-                        image:this.props.image,
-                        alt:this.props.label,
-                        nutrition:this.props.nutrition,
-                        shareas:this.props.shareas,
-                        url:this.props.url,
-                        yield:this.props.yield
+                        label:recipe.label,
+                        calories:recipe.calories,
+                        image:recipe.image,
+                        alt:recipe.label,
+                        nutrition:recipe.digest,
+                        shareas:recipe.shareas,
+                        url:recipe.url,
+                        yield:recipe.yield
                         
                     }
                 }}>
