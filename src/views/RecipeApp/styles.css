@@ -53,6 +53,28 @@ form input, .searchSubmitBtn{
 .recipeItem img{
       width:100%;
 }
-.info-wrap {
+.recipeDetails{
+      background: rgb(24,40,55);
+      color: #fff;
+      padding: 30px;
+}
+.nutrientInfoWrap {
       padding: 12px;
+  }
+  .info-wrap{
+        padding: 8px;
+  }
+  .nutritionFacts {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      background: #fff;
+  }
+  .nutritionFacts h3{
+        color:black;
+  }
+  .nutrients {
+      color: #333;
+      padding: 14px;
+      
   }

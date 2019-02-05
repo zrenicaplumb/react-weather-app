@@ -91,7 +91,7 @@ export default class App extends React.Component{
                                           getRecipeData={this.getRecipeData}
                                     />
                                     {this.state.searchItem && <h2 className="searchItem">{this.state.searchItem} Recipes</h2>}
-                                    <div className="recipeListContainer">{}
+                                    <div className="recipeListContainer">
                                     {this.state.recipes && this.state.recipes.map(function(recipe){
                                           
                                           return(
@@ -102,11 +102,11 @@ export default class App extends React.Component{
                                                             image={recipe.image}
                                                             alt={recipe.label}
                                                             calories={recipe.calories}
-                                                            totalTime={recipe.totalTime}
                                                             shareas={recipe.shareas}
                                                             source={recipe.source}
                                                             url={recipe.url}
-                                                            // nutrition={this.state.nutrition}
+                                                            nutrition={recipe.digest}
+                                                            yield={recipe.yield}
                                                       />
                         
                                                 </div>    
