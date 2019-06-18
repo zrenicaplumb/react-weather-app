@@ -31,6 +31,45 @@ export default class App extends React.Component{
 
       }
 
+      componentDidMount(){
+            this.defaultSearch();
+      }
+
+      async defaultSearch(){    
+            let app = this;
+            const currWeatherApiCall = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${API_KEY}`);
+            const currWeatherData = await currWeatherApiCall.json();
+            const forecastApiCall = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=London,uk&appid=${API_KEY}`);
+            let forecastData = await forecastApiCall.json();
+            //get the forecast data
+            console.log(forecastData);
+            //make the new array to replace the one in state
+            const forecastDataArray = [];
+            
+            forecastData.list.forEach(function(item){
+
+                  forecastDataArray.push(item);
+                  
+            })
+
+            const hourlyWeather = [];
+
+            
+
+            
+            this.setState({
+                  temperature:currWeatherData.main.temp,
+                  humidity:currWeatherData.main.humidity,
+                  city:currWeatherData.name,
+                  country:currWeatherData.sys.country,
+                  description:currWeatherData.weather[0].description,
+                  error:null,
+                  forecastDataArray:forecastDataArray,
+
+                  hourlyWeather:hourlyWeather
+            })
+      }
+
       async getWeather(e){    
             let app = this;
             e.preventDefault();
@@ -93,11 +132,11 @@ export default class App extends React.Component{
                         <Forecast
                               forecastDataArray={this.state.forecastDataArray}
                         >
-                              <ForecastHourly 
-                                    hourlyWeather={this.state.hourlyWeather}
-                              />
+                              
                         </Forecast>
-                       
+                        {/* <ForecastHourly 
+                                    hourlyWeather={this.state.hourlyWeather}
+                              /> */}
 
                         
                   </div>
